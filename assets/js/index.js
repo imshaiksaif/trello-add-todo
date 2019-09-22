@@ -70,16 +70,20 @@ function checkListItems() {
 
 //adding checklist to dom
 $(function() {
-	let $todo = $('.new-todo');
-	$($todo).keyup((e) => {
-		if (e.keyCode === 13) {
-			let data = $todo.val();
+	// let $todo = $('.new-todo');
+	$("#add").keyup((e) => {
+		if(e.which === 13) {
+			e.preventDefault();
+			// debugger;
+			// console.log($("#add").val())
+			let data = $("#add").val();
 			if (data != '' && data != undefined) {
-				e.preventDefault();
 				readWriteFromApi(
 					'POST',
 					`https://api.trello.com/1/checklists/5d85c4782c382f10ae44d59d/checkItems?&name=${data}&keepFromSource=all&key=${api}&token=${token}`
-        );
+					);
+					$("#add").text("");
+					console.log($("#add").val());
         // debugger;
 				checkListItems().then((item) => {
 					createChecklistItems(item[0].checkItems[item[0].checkItems.length - 1]);
@@ -143,6 +147,8 @@ function createChecklistItems(checkListItem) {
 		input.setAttribute('checked', true);
 		$(function() {
 			$('#checkname' + checkListItem.id).css('text-decoration', 'line-through');
+			// console.log($('#checkname'+checkListItem.id))
+			// debugger;
 		});
 	}
 
@@ -185,13 +191,13 @@ async function updateStatusOfCheckList(checkListId, itemId) {
 		return val;
 	});
 	if ($('input:checkbox[id=' + itemId + ']').is(':checked')) {
-		$('#checkname' + itemId).css('text-decoration', 'none');
+		$('#checkname' + itemId).css('text-decoration', 'line-through');
 		readWriteFromApi(
 			'PUT',
 			`https://api.trello.com/1/cards/${cardId}/checkItem/${itemId}?state=complete&checked=true&key=${api}&token=${token}`
 		);
 	} else {
-		$('#checkname' + itemId).css('text-decoration', 'line-through');
+		$('#checkname' + itemId).css('text-decoration', 'none');
 		readWriteFromApi(
 			'PUT',
 			`https://api.trello.com/1/cards/${cardId}/checkItem/${itemId}?state=complete&checked=false&key=${api}&token=${token}`
@@ -202,3 +208,9 @@ async function updateStatusOfCheckList(checkListId, itemId) {
 
 //Running Checklist function
 displayCheckList();
+
+//function to prevent form from submitting
+function mySubmit(e) { 
+	e.preventDefault(); 
+	return false;
+  }

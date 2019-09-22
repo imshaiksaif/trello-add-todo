@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Trello Project By Saif</title>
-    <link rel="stylesheet" href="./assets/css/main.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./assets/css/main.css">
     <script src="./assets/js/index.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand mx-auto" href="#">Trello Project @Saif</a>
+    <nav id="navigation" class="navbar navbar-expand-lg navbar-light bg-primary">
+        <a class="navbar-brand" href="#">Trello Project @Saif</a>
     </nav>
             <div class="container">
         <div class="jumbotron">
@@ -21,11 +21,11 @@
             <div class="box-message">
                 <p id="message"></p>
             </div>
-              <form action="">
+              <form onsubmit="return mySubmit(event)">
                     <legend>Todos</legend>
                     <div class="form-group">
                         <div class="row mb-3">
-                            <input type="text" class="form-control col-8 mr-3 new-todo" placeholder="Add a new todo">
+                            <input id="add" type="text" class="form-control col-8 mr-3 new-todo" placeholder="Add a new todo">
                         </div>
                         <ul class="check-list">
                            
