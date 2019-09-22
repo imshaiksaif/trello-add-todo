@@ -1,5 +1,5 @@
-#input-text {
-    color: lightblue;
+#add {
+    color: #794A8D;
     border-color: lightblue;
     /* margin: 15px; */
     padding: 20px;
@@ -16,9 +16,21 @@ nav > a{
      font-size: 1.5em;
  }
 
-.line {
-    text-decoration: line-through;
+ .card-list {
+     display: flex;
+     justify-content: space-between;
+     width: 50%;
+ }
+
+
+.remove-icon {
+    color: brown;
 }
 
+.card-name, legend{
+    color: #794A8D;
+}
 
-
+#navigation {
+    background: #794A8D;
+}
