@@ -70,21 +70,19 @@ function checkListItems() {
 
 //adding checklist to dom
 $(function() {
-	// let $todo = $('.new-todo');
-	$("#add").keyup((e) => {
-		if(e.which === 13) {
+	$('#add').keyup((e) => {
+		if (e.which === 13) {
 			e.preventDefault();
 			// debugger;
 			// console.log($("#add").val())
-			let data = $("#add").val();
+			let data = $('#add').val();
 			if (data != '' && data != undefined) {
 				readWriteFromApi(
 					'POST',
 					`https://api.trello.com/1/checklists/5d85c4782c382f10ae44d59d/checkItems?&name=${data}&keepFromSource=all&key=${api}&token=${token}`
-					);
-					$("#add").text("");
-					console.log($("#add").val());
-        // debugger;
+				);
+
+				// debugger;
 				checkListItems().then((item) => {
 					createChecklistItems(item[0].checkItems[item[0].checkItems.length - 1]);
 				});
@@ -92,7 +90,6 @@ $(function() {
 		}
 	});
 });
-
 
 // delete checklist items
 function deleteChecklistItem(checklistId, itemId) {
@@ -102,7 +99,6 @@ function deleteChecklistItem(checklistId, itemId) {
 	);
 	$('#' + itemId).remove();
 }
-
 
 //display or show checklist
 async function displayCheckList() {
@@ -114,7 +110,6 @@ async function displayCheckList() {
 		});
 	});
 }
-
 
 //create checklist Items dynamically
 function createChecklistItems(checkListItem) {
@@ -158,8 +153,7 @@ function createChecklistItems(checkListItem) {
 	$('.check-list').append(createList);
 }
 
-
-//update checklist on 
+//update checklist on
 function updateChecklistItem(checkListId, itemId, event) {
 	if (event.keyCode == 13) {
 		event.preventDefault();
@@ -184,7 +178,6 @@ function updateChecklistItem(checkListId, itemId, event) {
 	}
 }
 
-
 //checks the status of checklist so that it can make changes (if checked / unchecked)
 async function updateStatusOfCheckList(checkListId, itemId) {
 	let cardId = await getCard(checkListId).then((val) => {
@@ -205,12 +198,11 @@ async function updateStatusOfCheckList(checkListId, itemId) {
 	}
 }
 
-
 //Running Checklist function
 displayCheckList();
 
 //function to prevent form from submitting
-function mySubmit(e) { 
-	e.preventDefault(); 
+function mySubmit(e) {
+	e.preventDefault();
 	return false;
-  }
+}
